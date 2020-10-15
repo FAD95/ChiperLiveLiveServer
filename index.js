@@ -3,9 +3,10 @@ const app = express()
 const server = require('http').Server(app)
 const cors = require('cors')
 const bodyparser = require('body-parser')
-const config = require('./config')
 const io = require('socket.io')(server)
 const child_process = require('child_process')
+
+const PORT = process.env.PORT || 3000
 
 app.use(cors())
 app.use(bodyparser.json())
@@ -68,6 +69,6 @@ io.on('connection', (socket) => {
   })
 })
 
-server.listen(config.port, () => {
-  console.log(`Server running on ${config.host}:${config.port}`)
+server.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`)
 })
