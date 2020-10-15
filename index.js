@@ -1,7 +1,14 @@
-const server = require('./server')
+const express = require('express')
+const app = express()
+const server = require('http').Server(app)
+const cors = require('cors')
+const bodyparser = require('body-parser')
 const config = require('./config')
 const io = require('socket.io')(server)
 const child_process = require('child_process')
+
+app.use(cors())
+app.use(bodyparser.json())
 
 io.on('connection', (socket) => {
   const rtmpUrl = socket.handshake.query.url
@@ -33,7 +40,7 @@ io.on('connection', (socket) => {
     '400k',
     '-f',
     'flv',
-    rtmpUrl
+    rtmpUrl,
   ])
   ffmpeg.on('close', (code, signal) => {
     console.log(
@@ -62,5 +69,5 @@ io.on('connection', (socket) => {
 })
 
 server.listen(config.port, () => {
-  console.log('Server running on port 8080')
+  console.log(`Server running on ${config.host}:${config.port}`)
 })
