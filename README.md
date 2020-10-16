@@ -15,9 +15,9 @@ Trough ffmpeg that video received is processed and transformed with a serie of p
 
 # Run Scripts
 
-*  `mpm install` Install dependencies
-*  `mpm run start` Run the server in prouction mode
-*  `mpm run dev` Run the server in development mode
+*  `npm install` Install dependencies
+*  `npm run start` Run the server in prouction mode
+*  `npm run dev` Run the server in development mode
 
 
 
