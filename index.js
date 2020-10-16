@@ -6,7 +6,7 @@ const bodyparser = require('body-parser')
 const io = require('socket.io')(server)
 const child_process = require('child_process')
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 app.use(cors())
 app.use(bodyparser.json())
@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
     '400k',
     '-f',
     'flv',
-    rtmpUrl,
+    rtmpUrl
   ])
   ffmpeg.on('close', (code, signal) => {
     console.log(
@@ -65,6 +65,7 @@ io.on('connection', (socket) => {
   })
 
   socket.on('disconnect', (e) => {
+    console.log('Disconnected')
     ffmpeg.kill('SIGINT')
   })
 })
